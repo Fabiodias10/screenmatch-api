@@ -21,7 +21,17 @@ public class Serie {
         this.genero = Categoria.fromString(dadosSerie.genero().split(",")[0].trim());
         this.atores = dadosSerie.atores();
         this.poster = dadosSerie.poster();
-        this.sinopse = ConsultaChatGPT.obterTraducao(dadosSerie.sinopse().trim());
+//        this.sinopse = ConsultaChatGPT.obterTraducao(dadosSerie.sinopse().trim());
+
+        String sinopseOriginal = dadosSerie.sinopse().trim();
+        try {
+            this.sinopse = ConsultaChatGPT.obterTraducao(sinopseOriginal);
+        } catch (Exception e) {
+            // Loga o erro para depuração, se quiser
+            System.out.println("Erro ao traduzir com ChatGPT: " + e.getMessage());
+            this.sinopse = sinopseOriginal; // usa a sinopse original
+        }
+
     }
 
     public String getTitulo() {
