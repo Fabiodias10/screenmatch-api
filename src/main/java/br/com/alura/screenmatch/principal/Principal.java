@@ -13,7 +13,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-
 public class Principal {
 
     private final SerieRepository repositorio;
@@ -65,8 +64,8 @@ public class Principal {
 
     private void listarSeriesBuscadas() {
         List<Serie> series = new ArrayList<>();
-
-        series = dadosSeries.stream().map(d -> new Serie(d)).collect(Collectors.toList());
+        series = repositorio.findAll();
+//        series = dadosSeries.stream().map(d -> new Serie(d)).collect(Collectors.toList());
         series.stream().sorted(Comparator.comparing(Serie::getGenero))
                 .forEach(System.out::println);
 
